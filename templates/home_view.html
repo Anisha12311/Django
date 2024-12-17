@@ -1,0 +1,43 @@
+{% extends 'base.html' %} {% block content %}
+<h1>Home page</h1>
+{{request.user}} {{request.user.is_authenticated}} {{name}}
+<p>This is home page</p>
+
+<ul>
+  {% for item in list%}
+    {% if item == 12 %}
+        <h5>this is {{item|add:"12"}}<h5>
+   {%else%}
+  <li>{{forloop.counter}}-{{ item}}</li>
+  {%endif%}
+  {%endfor%}
+</ul>
+{% comment %} {% autoescape off %}
+{{ list|join:", "|escape }}
+{% endautoescape %} {% endcomment %}
+
+
+{%comment "Optional note"%}
+<p>this is important</p>
+{%endcomment%}
+
+
+{%for o in list%}
+{%cycle 'red' 'blue' as bgcolor silent%}
+{%if forloop.counter == 3%}
+  {%resetcycle%}
+{%endif%}
+  <li style = 'background-color : {{bgcolor}}'>
+    {{o}}
+  </li>
+{%endfor%}
+
+
+
+{%filter force_escape| upper%}
+This is filter text, HELLO
+{%endfilter%}
+
+
+
+{% endblock %}
